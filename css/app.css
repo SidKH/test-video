@@ -1,0 +1,6 @@
+* {
+  box-sizing: border-box;
+}
+.video-box {
+  margin: 20px auto;
+}

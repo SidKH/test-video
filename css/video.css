@@ -1,0 +1,131 @@
+.video-box {
+  width: 600px;
+  display: block;
+  position: relative;
+  visibility: hidden;
+}
+.video-box.loaded {
+  visibility: visible;
+}
+.video-box .overlay-btns {
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 40px;
+  background: rgba(255, 255, 255, 0.5);
+  font-size: 100px;
+  transition: opacity 0.3s;
+  cursor: pointer;
+}
+.video-box.play .overlay-btns {
+  opacity: 0;
+}
+.video-box .overlay-btns span {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding-top: 116px;
+  display: block;
+  cursor: default;
+}
+.video-box .navigation {
+  background: #424242;
+  color: #E9E9E9;
+  height: 40px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.video-box video {
+  display: block;
+  width: 100%;
+}
+.video-box .action-btn {
+  display: inline-block;
+  width: 40px;
+  height: 100%;
+}
+.video-box .action-btn span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 11px 12px;
+  cursor: pointer;
+}
+.video-box .action-btn .pause,
+.video-box .action-btn .repeat,
+.video-box.play .action-btn .play,
+.video-box.ended .action-btn .play,
+.video-box .overlay-btns .pause,
+.video-box .overlay-btns .repeat,
+.video-box.play .overlay-btns .play,
+.video-box.ended .overlay-btns .play {
+  display: none;
+}
+.video-box.play .action-btn .pause,
+.video-box.ended .action-btn .repeat,
+.video-box.play .overlay-btns .pause,
+.video-box.ended .overlay-btns .repeat {
+  display: block;
+}
+.video-box .progress-bar {
+  vertical-align: top;
+  display: inline-block;
+  width: 318px;
+  background: #BCBCBC;
+  margin: 15px 10px 0 0;
+}
+.video-box .progress-bar .progress {
+  display: block;
+  height: 10px;
+  width: 50%;
+  background: #3299BB;
+  pointer-events: none;
+}
+.video-box .volume-progress {
+  width: 100px;
+  background: #BCBCBC;
+  display: inline-block;
+  vertical-align: top;
+  margin: 15px 10px 0 0;
+}
+.video-box .volume-progress .progress {
+  display: block;
+  height: 10px;
+  background: #FF9900;
+  pointer-events: none;
+}
+.video-box .time-progress {
+  font-size: 12px;
+  display: inline-block;
+  margin-right: 10px;
+  vertical-align: top;
+  margin: 13px 10px 0 0;
+}
+.video-box .time-progress .remaining-time,
+.video-box .time-progress.remaining .current-time {
+  display: none;
+}
+.video-box .time-progress.remaining .remaining-time {
+  display: inline;
+}
+.video-box .mute {
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: top;
+  margin: 12px 5px 0 0;
+  width: 12px;
+}
+.video-box.mute .mute .fa:before {
+  content: "\f026";
+}
+.video-box .full-screen {
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 12px;
+}
