@@ -56,7 +56,7 @@ window.VideoExt = (function ($) {
 
     // On volume change check for mute state and trigger custom event
     this.video.addEventListener('volumechange', function () {
-      if (this.video.volume === 0 || this.video.muted === true) {
+      if (this.video.muted === true) {
         this.onMute();
       } else {
         this.onUnMute();
