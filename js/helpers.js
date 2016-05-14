@@ -1,3 +1,5 @@
+"use strict";
+
 /**
  * Object with helper functions
  */
