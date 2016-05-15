@@ -182,5 +182,12 @@ window.VideoExt = (function ($) {
     }
   }
 
+  /**
+   * Destroy video container
+   */
+  Constructor.prototype.destroy = function() {
+    this.$cnt.remove();
+  };
+
   return Constructor;
 }(jQuery));

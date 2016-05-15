@@ -17,7 +17,6 @@ window.VideoCustom = (function ($) {
     this.createVideo(function () {
       this.videoEvents();
       this.createNavigation();
-      this.eventNamespace = 'videoExtension';
     }.bind(this));
   };
 
@@ -31,27 +30,27 @@ window.VideoCustom = (function ($) {
   Constructor.prototype.createNavigation = function () {
     this.$nav = $('<div class="navigation"></div>');
 
-    var $actionBtn = $('<div class="action-btn"></div>').append(
+    this.$actionBtn = $('<div class="action-btn"></div>').append(
       this.processEl(this.playButton()),
       this.processEl(this.pauseButton()),
       this.processEl(this.repeatButton())
     );
 
-    var $overlayBtns = $('<div class="overlay-btns"></div>').append(
+    this.$overlayBtns = $('<div class="overlay-btns"></div>').append(
       this.processEl(this.playButton()),
       this.processEl(this.pauseButton()),
       this.processEl(this.repeatButton())
     );
 
     this.$nav.append(
-      $actionBtn,
+      this.$actionBtn,
       this.processEl(this.timeProgress()),
       this.processEl(this.progressBar()),
       this.processEl(this.muteButton()),
       this.processEl(this.volumeBar()),
       this.processEl(this.fullScreenButton())
     );
-    this.$cnt.append(this.$nav, $overlayBtns);
+    this.$cnt.append(this.$nav, this.$overlayBtns);
   }
 
   /**
@@ -77,7 +76,7 @@ window.VideoCustom = (function ($) {
     return {
       tpl: '<span class="play"><i class="fa fa-play" aria-hidden="true"></i></span>',
       cb: function ($el) {
-        $el.off('click.' + self.eventNamespace).on('click.' + self.eventNamespace, function () {
+        $el.on('click', function () {
           self.play();
         });
       }
@@ -93,7 +92,7 @@ window.VideoCustom = (function ($) {
     return {
       tpl: '<span class="pause"><i class="fa fa-pause" aria-hidden="true"></i></span>',
       cb: function ($el) {
-        $el.off('click.' + self.eventNamespace).on('click.' + self.eventNamespace, function () {
+        $el.on('click', function () {
           self.pause();
         });
       }
@@ -109,7 +108,7 @@ window.VideoCustom = (function ($) {
     return {
       tpl: '<span class="repeat"><i class="fa fa-repeat" aria-hidden="true"></i></span>',
       cb: function ($el) {
-        $el.off('click.' + self.eventNamespace).on('click.' + self.eventNamespace, function () {
+        $el.off('click').on('click', function () {
           self.play();
         });
       }
@@ -125,7 +124,7 @@ window.VideoCustom = (function ($) {
     return {
       tpl: '<span class="mute"><i class="fa fa-volume-down" aria-hidden="true"></i></span>',
       cb: function ($el) {
-        $el.off('click.' + self.eventNamespace).on('click.' + self.eventNamespace, function () {
+        $el.off('click').on('click', function () {
           self.toggleMute();
         });
       }
@@ -164,7 +163,6 @@ window.VideoCustom = (function ($) {
           var $el = $(el);
           var x = e.pageX - $el.offset().left;
           var percents = x / $el.width();
-          console.log(el.offsetLeft);
           self.setTime(percents, true);
         }
         function setProgress(time) {
@@ -259,6 +257,15 @@ window.VideoCustom = (function ($) {
     }
   }
 
+  /**
+   * Destroy video container and all its references
+   *   to prevent memory leaking from undelegated event listeners
+   */
+  Constructor.prototype.destroy = function() {
+    this.$cnt.remove();
+    this.$nav = null;
+    this.$overlayBtns = null;
+  };
+
   return Constructor;
 }(jQuery));
-console.log(window.VideoControls);
